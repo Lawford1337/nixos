@@ -38,9 +38,7 @@ in
     fonts.packages = with pkgs; [
       noto-fonts
       noto-fonts-color-emoji
-      (nerdfonts.override {
-        fonts = [ "JetBrainsMono" "MaterialDesignIcons" ];
-      })
+      nerd-fonts.jetbrains-mono 
     ];
 
     xdg.portal = {
