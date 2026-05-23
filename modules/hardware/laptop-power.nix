@@ -18,7 +18,7 @@ in
     };
 
     zramSwap = {
-      enabble = true;
+      enable = true;
       memoryPercent = 40;
     };
     
