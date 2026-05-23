@@ -9,6 +9,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    
+  home-manager.users.lawford = {
     programs.ssh = {
       startAgent = true;
 
@@ -17,7 +19,6 @@ in
 	ServerAliveCountMax 3
 	AddKeysToAgent yes
       '';
-      home-manager.users.lawford = {
         matchBlocks = {
           "vmdev" = {
             #hostname = "";

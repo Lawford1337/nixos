@@ -11,7 +11,7 @@ in
   config = lib.mkIf cfg.enable {
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     nix.settings.auto-optimise-store = true;
-
+    networking.networkmanager.enable = true;
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
     boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -44,6 +44,7 @@ in
       wget
       curl
       neovim
+      networkmanagerapplet
     ];
   };
 }
