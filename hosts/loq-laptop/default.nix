@@ -37,4 +37,5 @@
 
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "23.11"; 
+  home-manager.users.lawford.home.stateVersion = "23.11";
 }
