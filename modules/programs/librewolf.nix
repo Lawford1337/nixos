@@ -16,7 +16,7 @@ in
     home-manager.users.lawford = {
       programs.librewolf = {
         enable = true;
-	setting = {
+	settings = {
 	  "privacy.userContext.enabled" = true;
 	  "privacy.userContext.ui.enabled" = true;
 	  "privacy.cleanOnShutdown.cookies" = false;
