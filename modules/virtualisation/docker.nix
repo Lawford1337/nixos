@@ -5,7 +5,7 @@ let
 in
 {
   options.lawford.virtualisation.docker = {
-    enable = lib.mkenableOption "Enable Docker and docker-compose";
+    enable = lib.mkEnableOption "Enable Docker and docker-compose";
   };
 
   config = lib.mkIf cfg.enable {
