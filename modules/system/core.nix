@@ -14,7 +14,6 @@ in
     networking.networkmanager.enable = true;
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
-    boot.kernelPackages = pkgs.linuxPackages_latest;
     boot.kernel.sysctl = {
       "net.ipv4.tcp_congestion_control" = "bbr";
       "net.core.default_qdisk" = "fq";
