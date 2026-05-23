@@ -17,16 +17,17 @@ in
 	ServerAliveCountMax 3
 	AddKeysToAgent yes
       '';
-
-      matchBlocks = {
-        "vmdev" = {
-          #hostname = "";
-	  user = "lawford";
-	  forwardAgent = true;
-	};
-	"forge" = {
-          user = "git";
-	  # identityFile = "~/.ssh/id_ed25519"
+      home-manager.users.lawford = {
+        matchBlocks = {
+          "vmdev" = {
+            #hostname = "";
+	    user = "lawford";
+	    forwardAgent = true;
+	  };
+	  "forge" = {
+            user = "git";
+	    # identityFile = "~/.ssh/id_ed25519"
+	  };
 	};
       };
     };  
