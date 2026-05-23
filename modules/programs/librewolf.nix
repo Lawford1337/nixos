@@ -4,7 +4,7 @@ let
   cfg = config.lawford.programs.librewolf;
 in
 {
-  optins.lawford.programs.librewolf = {
+  options.lawford.programs.librewolf = {
     enable = lib.mkEnableOption "Librewolf with containers";
   };
 
