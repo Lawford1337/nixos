@@ -22,7 +22,6 @@ in
 	  biomejs.biome
 	  eamodio.gitlens
 	  gruntfuggly.todo-tree
-	  jeanp413.open-remote-ssh
         ];
 
 	userSettings = {
