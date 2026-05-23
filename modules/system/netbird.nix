@@ -5,7 +5,7 @@ let
 in
 {
   options.lawford.services.netbird = {
-    enable = lib.mkEnableOption "Enable netbird"
+    enable = lib.mkEnableOption "Enable netbird";
   };
 
   config = lib.mkIf cfg.enable {
