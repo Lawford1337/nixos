@@ -25,7 +25,6 @@ in
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-    nix.settings.auto-optimise-store = true;
 
     time.timeZone = "Asia/Almaty";
     i18n.defaultLocale = "en_US.UTF-8";
