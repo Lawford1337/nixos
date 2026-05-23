@@ -28,7 +28,7 @@ in
 	oh-my-zsh = {
           enable = true;
 	  plugins = [ "git" "sudo" "z" ];
-	  theme = "Powerlevel10k"
+	  theme = "Powerlevel10k";
 	};
       };
 
