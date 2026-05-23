@@ -32,7 +32,7 @@
   users.users.lawford = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" "audio" "docker" ];
-    shell = pks.zsh;
+    shell = pkgs.zsh;
   };
 
   nixpkgs.config.allowUnfree = true;

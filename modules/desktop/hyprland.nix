@@ -18,6 +18,13 @@ in
       enable = true;
       wayland.enable = true;
     };
+    
+    services.xserver.xkb = {
+      layout = "us,ru";
+      options = "grp:alt_shift_toogle";
+    };
+    
+    console.useXkbConfig = true;
 
     environment.systemPackages = with pkgs; [
       qt6.qtwayland
