@@ -8,7 +8,7 @@ in
     enable = lib.mkEnableOption "Enable hyprshot and notification";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       libnotify
       hyprshot
