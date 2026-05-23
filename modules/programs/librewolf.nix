@@ -9,7 +9,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    enviroment.systemPackages = with pkgs; [
+    environment.systemPackages = with pkgs; [
       librewolf
     ];
 
