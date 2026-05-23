@@ -10,7 +10,7 @@ in
 
   config = lib.mkIf cfg.enable {
     home-manager.users.lawford = {
-      programs.vscode = {
+      programs.vscodium = {
         enable = true;
 	package = pkgs.vscodium;
 
