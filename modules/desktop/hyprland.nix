@@ -57,7 +57,7 @@ in
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
-      puls.enable = true;
+      pulse.enable = true;
     };
   };
 }
