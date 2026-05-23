@@ -8,7 +8,7 @@ in
     enable = lib.mkEnableOption "Librewolf with containers";
   };
 
-  config = lib.mkif cfg.enable {
+  config = lib.mkIf cfg.enable {
     enviroment.systemPackages = with pkgs; [
       librewolf
     ];
