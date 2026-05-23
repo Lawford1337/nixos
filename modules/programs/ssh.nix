@@ -1,0 +1,34 @@
+{ lib, config, pkgs, ... }:
+
+let
+  cfg = config.lawford.programs.ssh;
+in
+{
+  options.lawford.programs.ssh = {
+    enable = lib.mkEnableOption "Enable SSH client and authentication agent";
+  };
+
+  config = lib.mkIf cfg.enable {
+    programs.ssh = {
+      startAgent = true;
+
+      extraConfig = ''
+        ServerAliveInterval 60
+	ServerAliveCountMax 3
+	AddKeysToAgent yes
+      '';
+
+      matchBlocks = {
+        "vmdev" = {
+          #hostname = "";
+	  user = "lawford";
+	  forwardAgent = true;
+	};
+	"forge" = {
+          user = "git";
+	  # identityFile = "~/.ssh/id_ed25519"
+	};
+      };
+    };  
+  };
+}
