@@ -8,7 +8,7 @@ in
     enable = lib.mkEnableOption "Enable hyprland with quickshell ecosystem"; 
   };
 
-  config = mkif cfg.enable {
+  config = mkIf cfg.enable {
     programs.hyprland = {
       enable = true; 
       xwayland.enable = true;
