@@ -31,7 +31,7 @@ in
 	  "editor.formatOnSave" = true;
 	  "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'Courier New', monospace";
 	 };
-	}:
+	};
       };
     };
   };
