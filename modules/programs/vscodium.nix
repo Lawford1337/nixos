@@ -15,7 +15,7 @@ in
 	package = pkgs.vscodium;
 
 	extensions = with pkgs.vscode-extensions; [
-	  benoins.nix
+	  bbenoins.nix
 	  rust-lang.rust-analyzer
 	  tamasfe.even-better-toml
 	  dbaeumer.vscode-eslint
