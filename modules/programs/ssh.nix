@@ -9,11 +9,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    
+  programs.ssh.startAgent = true;    
   home-manager.users.lawford = {
     programs.ssh = {
-      startAgent = true;
-
       extraConfig = ''
         ServerAliveInterval 60
 	ServerAliveCountMax 3
