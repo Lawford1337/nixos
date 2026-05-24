@@ -7,6 +7,7 @@ in
   options.lawford.programs.terminal = {
     enable = lib.mkEnableOption "terminal stack (WezTerm, zsh, yazi, tmux)";
   };
+
   config = lib.mkIf cfg.enable {
     programs.zsh.enable = true;
 
@@ -14,34 +15,53 @@ in
       wezterm
       fastfetch
       btop
-      fzf
+      ffmpegthumbnailer
+      p7zip
+      jq
+      poppler
+      fd
       ripgrep
+      fzf
+      imagemagick
     ];
 
     home-manager.users.lawford = {
+      programs.fish.enable = false;
+
       programs.zsh = {
         enable = true;
-	enableCompletion = true;
-	autosuggestion.enable = true;
-	syntaxHighlighting.enable = true;
+        enableCompletion = true;
+        autosuggestion.enable = true;
+        syntaxHighlighting.enable = true;
+      };
 
-	oh-my-zsh = {
-          enable = true;
-	  plugins = [ "git" "sudo" "z" ];
-	  theme = "robbyrussell";
-	};
+      programs.starship = {
+        enable = true;
+        enableZshIntegration = true;
+      };
+
+      programs.zoxide = {
+        enable = true;
+        enableZshIntegration = true;
+      };
+
+      programs.eza = {
+        enable = true;
+        enableZshIntegration = true;
+        icons = "auto";
+        extraOptions = [ "--group-directories-first" "--header" ];
       };
 
       programs.yazi = {
         enable = true;
-	shellWrapperName = "y";
-	enableZshIntegration = true;
+        shellWrapperName = "y";
+        enableZshIntegration = true;
       };
 
       programs.tmux = {
         enable = true;
-	clock24 = true;
-	keyMode = "vi";
+        clock24 = true;
+        keyMode = "vi";
       };
     };
   };
