@@ -14,13 +14,16 @@ in
     ];
 
     home-manager.users.lawford = {
-      programs.librewolf = {
-        enable = true;
-	settings = {
-	  "privacy.userContext.enabled" = true;
-	  "privacy.userContext.ui.enabled" = true;
-	  "privacy.cleanOnShutdown.cookies" = false;
-	};
+    programs.librewolf = {
+      enable = true;
+      settings = {
+          "privacy.clearOnShutdown.cookies" = false;
+          "privacy.clearOnShutdown.history" = false;
+          "privacy.clearOnShutdown.offlineApps" = false;
+          "network.cookie.lifetimePolicy" = 0;
+          "privacy.userContext.enabled" = true;
+          "privacy.userContext.ui.enabled" = true;
+        };
       };
     };
   };

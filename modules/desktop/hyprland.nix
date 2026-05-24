@@ -33,6 +33,7 @@ in
 
     environment.systemPackages = with pkgs; [
       qt6.qmake
+      hyprshot
       wl-clipboard
       awww
       libnotify

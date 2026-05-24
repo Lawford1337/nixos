@@ -19,6 +19,8 @@ in
       "net.core.default_qdisk" = "fq";
     };
     
+    boot.loader.systemd-boot.configurationLimit = 5;
+
     nix.gc = {
       automatic = true;
       dates = "weekly";
