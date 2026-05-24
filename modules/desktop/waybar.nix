@@ -15,8 +15,8 @@ in
         settings = {
           mainBar = {
             layer = "top";
-            position = "left";
-            width = 46;
+            position = "top";
+            height = 36;
             margin-top = 0;
             margin-bottom = 0;
             
