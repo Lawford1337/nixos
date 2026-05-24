@@ -37,7 +37,7 @@ in
       wl-clipboard
       awww
       libnotify
-      inputs.caelestia-shell.packages.${pkgs.system}.default
+      inputs.caelestia-shell.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
     fonts.packages = with pkgs; [
