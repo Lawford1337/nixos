@@ -15,8 +15,8 @@ in
         settings = {
           mainBar = {
             layer = "top";
-            position = "top";
-            height = 36;
+            position = "left";
+            width = 46;
             margin-top = 0;
             margin-bottom = 0;
             
@@ -30,7 +30,7 @@ in
             };
 
             "clock" = {
-              format = "{:%H:%M | %d.%m}";
+              format = "{:%H\n%M}";
               tooltip-format = "<tt>{calendar}</tt>";
             };
 
