@@ -38,7 +38,7 @@ in
       awww
       libnotify
       inputs.caelestia-shell.packages.${pkgs.stdenv.hostPlatform.system}.default
-      inputs.caelestia-shell.inputs.caelestia-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
+      mutagen
     ];
 
     fonts.packages = with pkgs; [
