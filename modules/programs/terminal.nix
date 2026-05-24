@@ -12,7 +12,6 @@ in
     programs.zsh.enable = true;
 
     environment.systemPackages = with pkgs; [
-      wezterm
       fastfetch
       btop
       ffmpegthumbnailer
@@ -28,12 +27,22 @@ in
     home-manager.users.lawford = {
       programs.fish.enable = false;
 
+      programs.wezterm.enable = true;
+
       programs.zsh = {
         enable = true;
         enableCompletion = true;
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
-      };
+        shellAliases = {
+          ls = "eza";
+          ll = "eza -l";
+          la = "eza -a";
+          lla = "eza -la";
+          tree = "eza --tree";
+          y = "yazi";
+        };
+      }; 
 
       programs.starship = {
         enable = true;
