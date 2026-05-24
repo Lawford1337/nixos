@@ -16,20 +16,18 @@ in
 
     services.displayManager.sddm = {
       enable = true;
-      wayland.enable = true;
+      wayland.enable = false;
     };
     
     services.xserver.xkb = {
       layout = "us,ru";
-      options = "grp:alt_shift_toogle";
+      options = "grp:alt_shift_toggle";
     };
     
     console.useXkbConfig = true;
 
     environment.systemPackages = with pkgs; [
-      qt6.qtwayland
       qt6.qmake
-
       wl-clipboard
       awww
       libnotify
@@ -44,8 +42,8 @@ in
     xdg.portal = {
       enable = true;
       extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-hyprland
+        pkgs.xdg-desktop-portal-gtk
       ];
       config.common.default = "*";
     };
