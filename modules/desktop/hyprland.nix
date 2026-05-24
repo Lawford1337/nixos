@@ -19,6 +19,9 @@ in
       wayland.enable = false;
     };
     
+    services.gnome.gnome-keyring.enable = true;
+    security.pam.services.sddm.enableGnomeKeyring = true;
+
     services.xserver.xkb = {
       layout = "us,ru";
       options = "grp:alt_shift_toggle";
