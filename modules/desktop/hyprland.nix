@@ -13,7 +13,7 @@ in
       enable = true; 
       xwayland.enable = true;
     };
-
+    services.xserver.enable = true;
     services.displayManager.sddm = {
       enable = true;
       wayland.enable = false;
