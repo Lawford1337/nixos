@@ -20,7 +20,9 @@ in
     };
     
     boot.loader.systemd-boot.configurationLimit = 5;
-
+    services.upower.enable = true;
+    hardware.bluetooth.enable = true;
+    hardware.bluetooth.powerOnBoot = true;
     nix.gc = {
       automatic = true;
       dates = "weekly";
