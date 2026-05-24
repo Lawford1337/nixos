@@ -15,6 +15,7 @@
     ../../modules/desktop/hyprshot.nix
     ../../modules/desktop/waybar.nix
     ../../modules/desktop/theme.nix
+    ../../modules/desktop/launcher.nix
   ];
 
   networking.hostName = "ll-laptop";
@@ -31,6 +32,7 @@
   lawford.programs.librewolf.enable = true;
   lawford.desktop.theme.enable = true;
   lawford.desktop.waybar.enable = true;
+  lawford.desktop.launcher.enable = true;
 
   users.users.lawford = {
     isNormalUser = true;
