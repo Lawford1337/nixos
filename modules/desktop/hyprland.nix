@@ -20,6 +20,8 @@ in
     };
     
     services.gnome.gnome-keyring.enable = true;
+    services.gnome.gcr-ssh-agent.enable = lib.mkForce false;
+    programs.ssh.startAgent = true;
     security.pam.services.sddm.enableGnomeKeyring = true;
 
     services.xserver.xkb = {
