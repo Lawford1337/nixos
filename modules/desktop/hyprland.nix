@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 let
   cfg = config.lawford.desktop.hyprland;
@@ -34,6 +34,7 @@ in
       wl-clipboard
       awww
       libnotify
+      inputs.caelestia-shell.packages.${pkgs.system}.default
     ];
 
     fonts.packages = with pkgs; [
