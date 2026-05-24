@@ -12,7 +12,6 @@ in
     programs.zsh.enable = true;
 
     environment.systemPackages = with pkgs; [
-      fastfetch
       btop
       ffmpegthumbnailer
       p7zip
@@ -28,6 +27,38 @@ in
       programs.fish.enable = false;
 
       programs.wezterm.enable = true;
+      
+      programs.fastfetch = {
+        enable = true;
+        settings = {
+          logo = {
+            source = "nixos_small"; 
+            padding = {
+              right = 3;
+            };
+          };
+          modules = [
+            "title"
+            "separator"
+            "os"
+            "host"
+            "kernel"
+            "uptime"
+            "packages"
+            "shell"
+            "wm"
+            "terminal"
+            "cpu"
+            "gpu"
+            "memory"
+            "disk"
+            "battery"
+            "break"
+            "colors"
+          ];
+        };
+      };
+
 
       programs.zsh = {
         enable = true;
