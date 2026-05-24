@@ -35,7 +35,8 @@ in
       qt6.qmake
       hyprshot
       wl-clipboard
-      libnotify
+      libnotify 
+      swaybg
     ];
 
     fonts.packages = with pkgs; [
