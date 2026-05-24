@@ -13,6 +13,8 @@
     ../../modules/programs/librewolf.nix
     ../../modules/virtualisation/docker.nix
     ../../modules/desktop/hyprshot.nix
+    ../../modules/desktop/waybar.nix
+    ../../modules/desktop/theme.nix
   ];
 
   networking.hostName = "ll-laptop";
@@ -27,7 +29,8 @@
   lawford.virtualisation.docker.enable = true;
   lawford.programs.vscodium.enable = true;
   lawford.programs.librewolf.enable = true;
-
+  lawford.desktop.theme.enable = true;
+  lawford.desktop.waybar.enable = true;
 
   users.users.lawford = {
     isNormalUser = true;

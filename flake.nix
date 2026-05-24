@@ -7,7 +7,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    caelestia-shell.url = "github:caelestia-dots/shell";
+    stylix.url = "github:danth/stylix";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
@@ -19,6 +19,7 @@
           ./hosts/loq-laptop
           
           home-manager.nixosModules.home-manager
+          inputs.stylix.nixosModules.stylix
         ];
       };
     };

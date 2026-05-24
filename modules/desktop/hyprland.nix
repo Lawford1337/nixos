@@ -5,7 +5,7 @@ let
 in
 {
   options.lawford.desktop.hyprland = {
-    enable = lib.mkEnableOption "Enable hyprland with quickshell ecosystem"; 
+    enable = lib.mkEnableOption "Enable hyprland"; 
   };
 
   config = lib.mkIf cfg.enable {
@@ -35,10 +35,7 @@ in
       qt6.qmake
       hyprshot
       wl-clipboard
-      awww
       libnotify
-      inputs.caelestia-shell.packages.${pkgs.stdenv.hostPlatform.system}.default
-      matugen
     ];
 
     fonts.packages = with pkgs; [
