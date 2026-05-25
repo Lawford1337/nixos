@@ -50,7 +50,7 @@ in
         enable = true;
         settings = {
           logo = {
-            source = "nixos_small"; 
+            source = "nixos"; 
             padding = {
               right = 3;
             };
