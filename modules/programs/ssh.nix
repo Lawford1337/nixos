@@ -20,7 +20,7 @@ in
       '';
         matchBlocks = {
           "vmdev" = {
-            hostname = "94.131.94.221";
+            hostname = "94.131.95.186";
 	    user = "lawford";
 	    forwardAgent = true;
 	  };
