@@ -83,11 +83,6 @@ in
         enableCompletion = true;
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
-	initExtra = ''
-          if [ -z "$TMUX" ]; then
-            exec tmux new-session -A -s main
-          fi
-        '';
         shellAliases = {
           ls = "eza";
           ll = "eza -l";
