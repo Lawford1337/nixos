@@ -26,13 +26,31 @@ in
     home-manager.users.lawford = {
       programs.fish.enable = false;
 
-      programs.wezterm.enable = true;
-      
+      programs.wezterm = {
+        enable = true;
+        extraConfig = ''
+          config.hide_tab_bar_if_only_one_tab = true
+
+          config.window_frame = {
+            active_titlebar_bg = 'none',
+            inactive_titlebar_bg = 'none',
+          }
+          
+          config.colors = config.colors or {}
+          config.colors.tab_bar = {
+            background = 'rgba(0, 0, 0, 0)',
+            active_tab = { bg_color = 'rgba(0, 0, 0, 0)', fg_color = '#ffffff' },
+            inactive_tab = { bg_color = 'rgba(0, 0, 0, 0)', fg_color = '#888888' },
+            new_tab = { bg_color = 'rgba(0, 0, 0, 0)', fg_color = '#888888' },
+          }
+        '';
+      };
+
       programs.fastfetch = {
         enable = true;
         settings = {
           logo = {
-            source = "nixos_small"; 
+            source = "nixos_old"; 
             padding = {
               right = 3;
             };
