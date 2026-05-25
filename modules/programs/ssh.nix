@@ -12,6 +12,7 @@ in
   programs.ssh.startAgent = true;    
   home-manager.users.lawford = {
     programs.ssh = {
+      enable = true;
       extraConfig = ''
         ServerAliveInterval 60
 	ServerAliveCountMax 3
@@ -25,7 +26,7 @@ in
 	  };
 	  "forge" = {
             user = "git";
-	    # identityFile = "~/.ssh/id_ed25519"
+	    identityFile = "~/.ssh/id_ed25519";
 	  };
 	};
       };
