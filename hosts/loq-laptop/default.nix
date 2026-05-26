@@ -34,7 +34,7 @@
   lawford.desktop.theme.enable = true;
   lawford.desktop.waybar.enable = true;
   lawford.desktop.launcher.enable = true;
-  lawford.programs.nvim.enable = true;
+  lawford.programs.neovim.enable = true;
   users.users.lawford = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" "audio" "docker" ];
