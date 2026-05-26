@@ -75,7 +75,7 @@ require("lazy").setup({
       })
       
       vim.lsp.enable("biome")
-      vim.lsp.enable("ts_ls") 
+      vim.lsp.enable("vtsls") 
 
       vim.keymap.set("n", "<leader>fm", function()
         vim.lsp.buf.format({ async = true, name = "biome" })
