@@ -20,7 +20,13 @@ in
         defaultEditor = true;
         viAlias = true;
         vimAlias = true;
-        extraLuaConfig = builtins.readFile ./init.lua; 
+        
+	extraLuaConfig = builtins.readFile ./init.lua;
+	
+	plugins = with pkgs.vimPlugins; [
+          mini-nvim
+        ];
+
         extraPackages = with pkgs; [
           ripgrep
           fd
