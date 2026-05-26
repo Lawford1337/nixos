@@ -12,8 +12,6 @@ in
     environment.systemPackages = with pkgs; [
       wl-clipboard
       git
-      typescript-language-server
-      typescript
     ];
 
     home-manager.users.lawford = {
@@ -29,6 +27,8 @@ in
           curl
           wget
           biome
+          nodePackages.typescript-language-server 
+          nodePackages.typescript                
         ];
       };
     };
