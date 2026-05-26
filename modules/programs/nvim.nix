@@ -12,7 +12,7 @@ in
     environment.systemPackages = with pkgs; [
       wl-clipboard
       git
-      nodePackages.typescript-language-server
+      typescript-language-server
       typescript
     ];
 
