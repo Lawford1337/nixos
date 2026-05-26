@@ -22,6 +22,8 @@ in
         vimAlias = true;     
         
         extraPackages = with pkgs; [
+	  typescript-language-server
+	  typescript
 	  biome
           ripgrep
           fd
