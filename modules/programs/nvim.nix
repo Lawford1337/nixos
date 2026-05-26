@@ -12,13 +12,11 @@ in
     environment.systemPackages = with pkgs; [
       wl-clipboard
       git
+      nodePackages.typescript-language-server
+      nodePackages.typescript
     ];
 
     home-manager.users.lawford = {
-      home.packages = with pkgs; [
-        nodePackages.typescript-language-server
-        nodePackages.typescript
-      ];
 
       programs.neovim = {
         enable = true;
