@@ -46,7 +46,6 @@ in
       git
       wget
       curl
-      neovim
       networkmanagerapplet
     ];
   };
