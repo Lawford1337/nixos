@@ -16,6 +16,7 @@
     ../../modules/desktop/waybar.nix
     ../../modules/desktop/theme.nix
     ../../modules/desktop/launcher.nix
+    ../../modules/programs/nvim.nix
   ];
 
   networking.hostName = "ll-laptop";
