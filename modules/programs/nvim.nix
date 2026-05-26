@@ -27,7 +27,9 @@ in
           curl
           wget
           biome
-          vtsls 
+          nodePackages.typescript-language-server
+          typescript
+          nodejs 
         ];
       };
     };
