@@ -21,8 +21,8 @@ in
         viAlias = true;
         vimAlias = true;
         
-	extraLuaConfig = builtins.readFile ./init.lua;
-	
+	initLua = builtins.readFile ./init.lua;
+
 	plugins = with pkgs.vimPlugins; [
           mini-nvim
         ];
