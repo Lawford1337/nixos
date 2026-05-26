@@ -22,6 +22,7 @@ in
         vimAlias = true;     
         
         extraPackages = with pkgs; [
+	  biome
           ripgrep
           fd
           curl
