@@ -10,25 +10,28 @@ in
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      wl-clipboard 
+      wl-clipboard
       git
     ];
 
     home-manager.users.lawford = {
+      home.packages = with pkgs; [
+        nodePackages.typescript-language-server
+        nodePackages.typescript
+      ];
+
       programs.neovim = {
         enable = true;
-        defaultEditor = true; 
-        viAlias = true;       
-        vimAlias = true;     
+        defaultEditor = true;
+        viAlias = true;
+        vimAlias = true;
         
         extraPackages = with pkgs; [
-	  typescript-language-server
-	  typescript
-	  biome
           ripgrep
           fd
           curl
           wget
+          biome
         ];
       };
     };
