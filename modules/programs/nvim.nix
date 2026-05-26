@@ -35,7 +35,8 @@ in
           biome
           vtsls
           typescript
-          nodejs 
+          nodejs
+	  lazygit
         ];
       };
     };
