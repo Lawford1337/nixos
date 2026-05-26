@@ -20,7 +20,7 @@ in
         defaultEditor = true;
         viAlias = true;
         vimAlias = true;
-        
+        extraLuaConfig = builtins.readFile ./init.lua; 
         extraPackages = with pkgs; [
           ripgrep
           fd
