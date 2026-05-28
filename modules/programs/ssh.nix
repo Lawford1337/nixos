@@ -20,7 +20,6 @@ in
       '';
         matchBlocks = {
           "vmdev" = {
-            hostname = "";
 	    user = "ilya";
 	    forwardAgent = true;
 	  };
