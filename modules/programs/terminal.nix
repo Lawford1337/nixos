@@ -21,6 +21,7 @@ in
       ripgrep
       fzf
       imagemagick
+      unzip
     ];
 
     home-manager.users.lawford = {
