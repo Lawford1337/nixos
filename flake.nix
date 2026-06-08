@@ -12,6 +12,7 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
     nixosConfigurations = {
+      
       loq-laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
@@ -22,6 +23,18 @@
           inputs.stylix.nixosModules.stylix
         ];
       };
+
+      desktop-pc = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/desktop-pc
+          
+          home-manager.nixosModules.home-manager
+          inputs.stylix.nixosModules.stylix
+        ];
+      };
+
     };
   };
 }
