@@ -31,12 +31,37 @@ require("lazy").setup({
     "ellisonleao/gruvbox.nvim",
     priority = 1000,
     config = function()
-      require("gruvbox").setup({
-        transparent_mode = true,
-      })
+      require("gruvbox").setup({ transparent_mode = true })
       vim.cmd("colorscheme gruvbox")
     end,
   },
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = { theme = "gruvbox" },
+  },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {},
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    }
+  },
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = {
+      bigfile = { enabled = true },
+      notifier = { enabled = true },
+      quickfile = { enabled = true },
+      statuscolumn = { enabled = true },
+      words = { enabled = true },
+    },
+  },
+
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -53,8 +78,11 @@ require("lazy").setup({
     end,
   },
   {
-    "ThePrimeagen/vim-be-good",
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {},
   },
+  { "ThePrimeagen/vim-be-good" },
   {
     "amitds1997/remote-nvim.nvim",
     version = "*",
@@ -65,18 +93,15 @@ require("lazy").setup({
     },
     config = true,
   },
+
   {
     "lewis6991/gitsigns.nvim",
     config = function()
-      require("gitsigns").setup({
-        current_line_blame = true, 
-      })
-      
+      require("gitsigns").setup({ current_line_blame = true })
       vim.keymap.set("n", "]h", "<cmd>Gitsigns next_hunk<CR>", { desc = "Next Git Hunk" })
       vim.keymap.set("n", "[h", "<cmd>Gitsigns prev_hunk<CR>", { desc = "Prev Git Hunk" })
     end,
   },
-  
   {
     "kdheepak/lazygit.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -84,53 +109,87 @@ require("lazy").setup({
       { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
     },
   },
+
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = { "c", "lua", "vim", "vimdoc", "javascript", "typescript", "tsx", "html", "css" },
+        highlight = { enable = true },
+      })
+    end,
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
+
+  {
+    "stevearc/conform.nvim",
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    keys = {
+      {
+        "<leader>fm",
+        function() require("conform").format({ async = true, lsp_fallback = true }) end,
+        desc = "Format file",
+      },
+    },
+    opts = {
+      formatters_by_ft = {
+        javascript = { "biome" },
+        typescript = { "biome" },
+        javascriptreact = { "biome" },
+        typescriptreact = { "biome" },
+        json = { "biome" },
+      },
+    },
+  },
+
+  {
+    "saghen/blink.cmp",
+    version = "*",
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      "onsails/lspkind.nvim",
+    },
+    opts = {
+      keymap = { preset = "default" },
+      appearance = {
+        use_nvim_cmp_as_default = true,
+        nerd_font_variant = "mono",
+      },
+      signature = { enabled = true },
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer" },
+      },
+    },
+  },
+
   {
     "neovim/nvim-lspconfig",
+    dependencies = { "saghen/blink.cmp" },
     config = function()
-      vim.lsp.config("biome", {
-        workspace_required = false,
-        single_file_support = true,
-        root_dir = function() return vim.fn.getcwd() end,
-      })
-      
-      vim.lsp.enable("biome")
-      vim.lsp.enable("vtsls") 
+      local lspconfig = require("lspconfig")
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-      vim.keymap.set("n", "<leader>fm", function()
-        vim.lsp.buf.format({ async = true, name = "biome" })
-      end, { desc = "Format file" })
-      
+      lspconfig.biome.setup({ capabilities = capabilities })
+      lspconfig.ts_ls.setup({ capabilities = capabilities })
+
       vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
     end,
   },
   {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp", 
-      "hrsh7th/cmp-path",    
-      "hrsh7th/cmp-buffer", 
-      "L3MON4D3/LuaSnip",     
+    "folke/trouble.nvim",
+    opts = {},
+    cmd = "Trouble",
+    keys = {
+      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+      { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
     },
-    config = function()
-      local cmp = require("cmp")
-      cmp.setup({
-        snippet = {
-          expand = function(args) require("luasnip").lsp_expand(args.body) end,
-        },
-        mapping = cmp.mapping.preset.insert({
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
-          ["<Tab>"] = cmp.mapping.select_next_item(), 
-          ["<S-Tab>"] = cmp.mapping.select_prev_item(), 
-        }),
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" }, 
-          { name = "path" },     
-          { name = "luasnip" },
-        }, {
-          { name = "buffer" },
-        })
-      })
-    end,
   },
 })
