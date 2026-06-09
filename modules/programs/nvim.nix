@@ -37,6 +37,9 @@ in
           typescript
           nodejs
 	  lazygit
+	  gcc
+	  gnumake
+	  tree-sitter
         ];
       };
     };
