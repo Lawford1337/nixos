@@ -166,6 +166,14 @@ require("lazy").setup({
       signature = { enabled = true },
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
+        providers = {
+          path = {
+            enabled = function()
+              local line = vim.api.nvim_get_current_line()
+              return not string.match(line, "@/")
+            end,
+          },
+        },
       },
     },
   },
@@ -178,7 +186,7 @@ require("lazy").setup({
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       lspconfig.biome.setup({ capabilities = capabilities })
-      lspconfig.ts_ls.setup({ capabilities = capabilities })
+      lspconfig.vtsls.setup({ capabilities = capabilities })
 
       vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
     end,
