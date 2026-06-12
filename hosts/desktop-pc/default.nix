@@ -21,6 +21,7 @@
     ../../modules/programs/librewolf.nix
     ../../modules/programs/ssh.nix
     ../../modules/virtualisation/docker.nix
+    ../../modules/virtualisation/qemu.nix
   ];
 
   networking.hostName = "desktop-pc";
@@ -65,6 +66,9 @@
   environment.systemPackages = with pkgs; [
     mumble
     pavucontrol
+  ];
+
+  home-manager.users.lawford.home.packages = with pkgs; [
     vesktop
   ];
 
