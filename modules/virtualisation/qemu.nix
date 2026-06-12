@@ -6,17 +6,16 @@
     qemu = {
       package = pkgs.qemu_kvm;
       runAsRoot = true;
-      ovmf.enable = true;
     };
   };
 
   programs.virt-manager.enable = true;
-  progrems.dconf.enable = true;
+  programs.dconf.enable = true;
 
-  enviroment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     virt-manager
     qemu_kvm
-    libvirtd
+    libvirt
     spice
     spice-gtk
     spice-protocol
