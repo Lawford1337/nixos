@@ -22,7 +22,7 @@
     ../../modules/programs/ssh.nix
     ../../modules/virtualisation/docker.nix
     ../../modules/virtualisation/qemu.nix
-
+    ../../modules/games/prismlauncher.nix
     #../../modules/games/hmcl.nix
   ];
 
@@ -51,7 +51,7 @@
 
   lawford.services.netbird.enable = true;
   lawford.virtualisation.docker.enable = true;
-
+  lawford.games.prismlauncher.enable = true;
   #lawford.games.hmcl.enable = true;
 
   security.rtkit.enable = true;

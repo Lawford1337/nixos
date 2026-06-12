@@ -8,7 +8,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix.url = "github:danth/stylix";
-    pollymc.url = "github:fnuecke/pollymc";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
