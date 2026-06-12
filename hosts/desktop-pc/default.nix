@@ -23,7 +23,7 @@
     ../../modules/virtualisation/docker.nix
     ../../modules/virtualisation/qemu.nix
 
-    ../../modules/games/hmcl.nix
+    #../../modules/games/hmcl.nix
   ];
 
   networking.hostName = "desktop-pc";
@@ -52,7 +52,7 @@
   lawford.services.netbird.enable = true;
   lawford.virtualisation.docker.enable = true;
 
-  lawford.games.hmcl.enable = true;
+  #lawford.games.hmcl.enable = true;
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -71,6 +71,7 @@
   environment.systemPackages = with pkgs; [
     mumble
     pavucontrol
+    inputs.pollymc.packages.${pkgs.system}.pollymc
   ];
 
   home-manager.users.lawford.home.packages = with pkgs; [
