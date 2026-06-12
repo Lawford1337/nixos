@@ -44,14 +44,15 @@ in
         stdenv.cc.cc
         zlib
         libGL
-        xorg.libX11
-        xorg.libXext
-        xorg.libXrandr
-        xorg.libXi
-        xorg.libXcursor
-        xorg.libXinerama
-        xorg.libXrender
-	alsa-lib
+        libx11
+        libxext
+        libxrandr
+        libxi
+        libxcursor
+        libxinerama
+        libxrender
+        xorg.libXtst
+        alsa-lib
         fontconfig
         freetype
       ];
