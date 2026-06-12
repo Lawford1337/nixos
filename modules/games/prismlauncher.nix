@@ -7,7 +7,7 @@ let
     owner = "PrismLauncher";
     repo = "libnbtplusplus";
     rev = "23b955121b8217c1c348a9ed2483167a6f3ff4ad";
-    hash = "sha256-BMgylHeKZd4FQKYoAxFSt+xAH+O1DBtAxdbQ5mJFE98=";
+    hash = "sha256-yy0q+bky80LtK1GWzz7qpM+aAGrOqLuewbid8WT1ilk=";
   };
 
   prismlauncher-unwrapped-9_1 = pkgs.prismlauncher-unwrapped.overrideAttrs (old: {
