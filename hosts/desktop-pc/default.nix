@@ -48,6 +48,14 @@
   lawford.services.netbird.enable = true;
   lawford.virtualisation.docker.enable = true;
 
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
   users.users.lawford = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" "audio" "docker" ];
@@ -56,6 +64,8 @@
 
   environment.systemPackages = with pkgs; [
     mumble
+    pavucontrol
+    vesktop
   ];
 
   nixpkgs.config.allowUnfree = true;
