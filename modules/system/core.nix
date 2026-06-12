@@ -51,6 +51,7 @@ in
         libxcursor
         libxinerama
         libxrender
+	xorg.libXxf86vm
         xorg.libXtst
         alsa-lib
         fontconfig

@@ -25,6 +25,7 @@
     #../../modules/games/prismlauncher.nix
     #../../modules/games/hmcl.nix
     ../../modules/games/legacylauncher.nix
+    ../../modules/programs/firefox.nix
   ];
 
   networking.hostName = "desktop-pc";
@@ -55,6 +56,7 @@
   #lawford.games.prismlauncher.enable = true;
   #lawford.games.hmcl.enable = true;
   lawford.games.legacylauncher.enable = true;
+  lawford.programs.firefox.enable = true;
 
   security.rtkit.enable = true;
   services.pipewire = {
