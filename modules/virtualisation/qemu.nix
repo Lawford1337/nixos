@@ -21,5 +21,5 @@
     spice-gtk
     spice-protocol
   ];
-  users.users.lawford.extraGroups = [ "libvirtd" "kvm" ]
+  users.users.lawford.extraGroups = [ "libvirtd" "kvm" ];
 }
