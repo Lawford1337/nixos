@@ -22,6 +22,8 @@
     ../../modules/programs/ssh.nix
     ../../modules/virtualisation/docker.nix
     ../../modules/virtualisation/qemu.nix
+
+    ../../modules/games/hmcl.nix
   ];
 
   networking.hostName = "desktop-pc";
@@ -35,6 +37,7 @@
 #  boot.loader.efi.canTouchEfiVariables = true;
   
   lawford.system.core.enable = true;
+
   lawford.desktop.hyprshot.enable = true;
   lawford.desktop.hyprland.enable = true;
   lawford.desktop.waybar.enable = true;
@@ -48,6 +51,8 @@
 
   lawford.services.netbird.enable = true;
   lawford.virtualisation.docker.enable = true;
+
+  lawford.games.hmcl.enable = true;
 
   security.rtkit.enable = true;
   services.pipewire = {
