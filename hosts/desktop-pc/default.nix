@@ -22,8 +22,9 @@
     ../../modules/programs/ssh.nix
     ../../modules/virtualisation/docker.nix
     ../../modules/virtualisation/qemu.nix
-    ../../modules/games/prismlauncher.nix
+    #../../modules/games/prismlauncher.nix
     #../../modules/games/hmcl.nix
+    ../../modules/games/legacylauncher.nix
   ];
 
   networking.hostName = "desktop-pc";
@@ -51,8 +52,9 @@
 
   lawford.services.netbird.enable = true;
   lawford.virtualisation.docker.enable = true;
-  lawford.games.prismlauncher.enable = true;
+  #lawford.games.prismlauncher.enable = true;
   #lawford.games.hmcl.enable = true;
+  lawford.games.legacylauncher.enable = true;
 
   security.rtkit.enable = true;
   services.pipewire = {
