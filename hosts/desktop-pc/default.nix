@@ -10,7 +10,7 @@
     ../../modules/system/netbird.nix
     
     # ../../modules/desktop/hyprland.nix
-    # ../../modules/desktop/mangowm.nix 
+     ../../modules/desktop/mangowm.nix 
     
     ../../modules/programs/nvim.nix
     ../../modules/programs/terminal.nix
