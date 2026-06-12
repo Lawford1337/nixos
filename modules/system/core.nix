@@ -50,7 +50,8 @@ in
         xorg.libXi
         xorg.libXcursor
         xorg.libXinerama
-        alsa-lib
+        xorg.libXrender
+	alsa-lib
         fontconfig
         freetype
       ];
