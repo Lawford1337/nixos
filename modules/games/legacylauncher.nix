@@ -5,7 +5,7 @@ let
 
   bootstrap = pkgs.fetchurl {
     url = "https://llaun.ch/jar";
-    hash = "";
+    hash = "sha256-Cbp1F8ipsweA/5pt4jC4kFJHg1rg2pFNZpkeKztLbE4=";
   };
 
   legacylauncher = pkgs.writeShellScriptBin "legacylauncher" ''
