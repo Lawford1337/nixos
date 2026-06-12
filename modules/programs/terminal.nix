@@ -22,6 +22,7 @@ in
       fzf
       imagemagick
       unzip
+      spotify-player
     ];
 
     home-manager.users.lawford = {
