@@ -1,5 +1,4 @@
 { lib, config, pkgs, ... }:
-
 let
   cfg = config.lawford.system.core;
 in
@@ -7,7 +6,6 @@ in
   options.lawford.system.core = {
     enable = lib.mkEnableOption "Enable core system configuration";
   };
-
   config = lib.mkIf cfg.enable {
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     nix.settings.auto-optimise-store = true;
@@ -18,7 +16,6 @@ in
       "net.ipv4.tcp_congestion_control" = "bbr";
       "net.core.default_qdisk" = "fq";
     };
-    
     boot.loader.systemd-boot.configurationLimit = 5;
     services.upower.enable = true;
     hardware.bluetooth.enable = true;
@@ -28,7 +25,6 @@ in
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-
     time.timeZone = "Asia/Almaty";
     i18n.defaultLocale = "en_US.UTF-8";
     i18n.extraLocaleSettings = {
@@ -41,6 +37,23 @@ in
       LC_PAPER = "ru_RU.UTF-8";
       LC_TELEPHONE = "ru_RU.UTF-8";
       LC_TIME = "ru_RU.UTF-8";
+    };
+    programs.nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        stdenv.cc.cc
+        zlib
+        libGL
+        xorg.libX11
+        xorg.libXext
+        xorg.libXrandr
+        xorg.libXi
+        xorg.libXcursor
+        xorg.libXinerama
+        alsa-lib
+        fontconfig
+        freetype
+      ];
     };
     environment.systemPackages = with pkgs; [
       git
