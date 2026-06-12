@@ -71,7 +71,6 @@
   environment.systemPackages = with pkgs; [
     mumble
     pavucontrol
-    inputs.pollymc.packages.${pkgs.system}.pollymc
   ];
 
   home-manager.users.lawford.home.packages = with pkgs; [
