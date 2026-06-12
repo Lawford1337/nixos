@@ -1,7 +1,7 @@
 { lib, config, pkgs, ... }:
 
 let
-  cfg = config.lawford.programs.hmcl;
+  cfg = config.lawford.games.hmcl;
 in
 {
   options.lawford.games.hmcl = {
