@@ -11,7 +11,7 @@ in
   config = lib.mkIf cfg.enable {
     stylix = {
       enable = true;
-      image = ../../assets/walll.jpg;
+      image = ../../assets/wall2.jpg;
       polarity = "dark";
 
       fonts = {
