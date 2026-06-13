@@ -25,7 +25,7 @@ in
               "hyprland/workspaces"
               "hyprland/window"
             ];
-            modules-center = [ "clock" ];
+            modules-center = [ "clock#time" "clock#date" ];
             modules-right = [
               "cpu"
               "memory"
@@ -57,8 +57,13 @@ in
               };
             };
 
-            "clock" = {
-              format = "  {:%H:%M}   {:%a, %d %b}";
+            "clock#time" = {
+              format = "  {:%H:%M}";
+              tooltip = false;
+            };
+
+            "clock#date" = {
+              format = "  {:%a, %d %b}";
               tooltip-format = "<tt><small>{calendar}</small></tt>";
               calendar = {
                 mode = "month";
@@ -84,8 +89,8 @@ in
 
             "memory" = {
               interval = 5;
-              format = "󰍛 {percentage}%";
-              tooltip-format = "RAM: {used:0.1f}G / {total:0.1f}G";
+              format = "󰍛 {used:0.1f}G/{total:0.1f}G";
+              tooltip-format = "RAM: {used:0.1f}G / {total:0.1f}G\nSwap: {swapUsed:0.1f}G / {swapTotal:0.1f}G";
               states = {
                 warning = 70;
                 critical = 90;
