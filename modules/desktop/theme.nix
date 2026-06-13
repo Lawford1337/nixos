@@ -45,10 +45,6 @@ in
         desktop = 1.0;
         applications = 1.0;
       };
-      targets.firefox = {
-       enable = true;
-       profileNames = [ "default" ];
-      };
     };
   };
 }

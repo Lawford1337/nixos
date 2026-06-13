@@ -43,19 +43,6 @@ in
       libraries = with pkgs; [
         stdenv.cc.cc
         zlib
-        libGL
-        libx11
-        libxext
-        libxrandr
-        libxi
-        libxcursor
-        libxinerama
-        libxrender
-	xorg.libXxf86vm
-        xorg.libXtst
-        alsa-lib
-        fontconfig
-        freetype
       ];
     };
     environment.systemPackages = with pkgs; [
