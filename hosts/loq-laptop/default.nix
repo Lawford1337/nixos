@@ -17,6 +17,7 @@
     ../../modules/desktop/theme.nix
     ../../modules/desktop/launcher.nix
     ../../modules/programs/nvim.nix
+    ../../modules/programs/firefox.nix
   ];
 
   networking.hostName = "ll-laptop";
@@ -35,6 +36,7 @@
   lawford.desktop.waybar.enable = true;
   lawford.desktop.launcher.enable = true;
   lawford.programs.neovim.enable = true;
+  lawford.programs.firefox.enable = true;
   users.users.lawford = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" "audio" "docker" ];
