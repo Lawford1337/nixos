@@ -199,12 +199,14 @@ require("lazy").setup({
     "neovim/nvim-lspconfig",
     dependencies = { "saghen/blink.cmp" },
     config = function()
-      local lspconfig = require("lspconfig")
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-      lspconfig.biome.setup({ capabilities = capabilities })
+      vim.lsp.config("biome", { 
+        capabilities = capabilities 
+      })
+      vim.lsp.enable("biome")
       
-      lspconfig.vtsls.setup({ 
+      vim.lsp.config("vtsls", { 
         capabilities = capabilities,
         settings = {
           typescript = {
@@ -217,7 +219,8 @@ require("lazy").setup({
           },
         },
       })
-
+      vim.lsp.enable("vtsls")
+      
       vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open Diagnostics" })
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
       
