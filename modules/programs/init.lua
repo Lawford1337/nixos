@@ -47,10 +47,22 @@ require("lazy").setup({
       vim.cmd("colorscheme gruvbox")
     end,
   },
+
+  -- {
+  --   "echasnovski/mini.base16",
+  --   priority = 1000,
+  --   config = function()
+  --     -- Здесь указывается палитра. Для примера - default-dark.
+  --     require("mini.base16").setup({
+  --       palette = require('mini.base16').mini_palette('#112641', '#e2e98f', 75)
+  --     })
+  --   end,
+  -- },
+
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = { theme = "gruvbox" },
+    opts = { theme = "auto" },
   },
   {
     "folke/noice.nvim",
@@ -73,7 +85,6 @@ require("lazy").setup({
       words = { enabled = true },
     },
   },
-
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -105,7 +116,6 @@ require("lazy").setup({
     },
     config = true,
   },
-
   {
     "lewis6991/gitsigns.nvim",
     config = function()
@@ -121,7 +131,6 @@ require("lazy").setup({
       { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
     },
   },
-
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -139,7 +148,6 @@ require("lazy").setup({
       require("nvim-ts-autotag").setup()
     end,
   },
-
   {
     "stevearc/conform.nvim",
     event = { "BufWritePre" },
@@ -161,7 +169,6 @@ require("lazy").setup({
       },
     },
   },
-
   {
     "saghen/blink.cmp",
     version = "*",
@@ -194,11 +201,11 @@ require("lazy").setup({
       },
     },
   },
-
   {
     "neovim/nvim-lspconfig",
     dependencies = { "saghen/blink.cmp" },
     config = function()
+      require("lspconfig")
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       vim.lsp.config("biome", { 
