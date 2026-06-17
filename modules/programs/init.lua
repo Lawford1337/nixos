@@ -11,6 +11,18 @@ vim.opt.splitbelow = true
 vim.opt.cursorline = true
 vim.opt.termguicolors = true
 
+vim.g.clipboard = {
+  name = 'OSC 52',
+  copy = {
+    ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+    ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+  },
+  paste = {
+    ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+    ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+  },
+}
+
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -191,9 +203,26 @@ require("lazy").setup({
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       lspconfig.biome.setup({ capabilities = capabilities })
-      lspconfig.vtsls.setup({ capabilities = capabilities })
+      
+      lspconfig.vtsls.setup({ 
+        capabilities = capabilities,
+        settings = {
+          typescript = {
+            suggest = { autoImports = true },
+            updateImportsOnFileMove = { enabled = "always" },
+          },
+          javascript = {
+            suggest = { autoImports = true },
+            updateImportsOnFileMove = { enabled = "always" },
+          },
+        },
+      })
 
-      vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
+      vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open Diagnostics" })
+      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+      
+      vim.keymap.set("n", "<leader>co", "<cmd>VtslsOrganizeImports<CR>", { desc = "Organize Imports" })
+      vim.keymap.set("n", "<leader>ci", "<cmd>VtslsAddMissingImports<CR>", { desc = "Add Missing Imports" })
     end,
   },
   {
