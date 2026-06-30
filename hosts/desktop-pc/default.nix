@@ -77,6 +77,11 @@
     pavucontrol
   ];
 
+  networking.extraHosts =
+  ''
+    127.0.0.1 kochevnik.localhost
+  '';
+
   home-manager.users.lawford.home.packages = with pkgs; [
     vesktop
   ];
