@@ -26,7 +26,7 @@
     #../../modules/games/hmcl.nix
     ../../modules/games/legacylauncher.nix
     ../../modules/programs/firefox.nix
-    ../../modules/games/osu.nix
+    ../../modules/programs/flatpak.nix
   ];
 
   networking.hostName = "desktop-pc";
@@ -58,7 +58,7 @@
   #lawford.games.hmcl.enable = true;
   lawford.games.legacylauncher.enable = true;
   lawford.programs.firefox.enable = true;
-  programs.osu-lazer.enable = true;
+  modules.flatpak.enable = true;
 
   security.rtkit.enable = true;
   services.pipewire = {
