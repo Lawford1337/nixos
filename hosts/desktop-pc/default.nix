@@ -26,6 +26,7 @@
     #../../modules/games/hmcl.nix
     ../../modules/games/legacylauncher.nix
     ../../modules/programs/firefox.nix
+    ../../modules/games/osu.nix
   ];
 
   networking.hostName = "desktop-pc";
@@ -57,6 +58,7 @@
   #lawford.games.hmcl.enable = true;
   lawford.games.legacylauncher.enable = true;
   lawford.programs.firefox.enable = true;
+  programs.osu-lazer.enable = true;
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -80,6 +82,7 @@
   networking.extraHosts =
   ''
     127.0.0.1 kochevnik.localhost
+    127.0.0.1 garage
   '';
 
   home-manager.users.lawford.home.packages = with pkgs; [
