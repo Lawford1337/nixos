@@ -27,6 +27,7 @@
     ../../modules/games/legacylauncher.nix
     ../../modules/programs/firefox.nix
     ../../modules/programs/flatpak.nix
+    ../../modules/system/dnsmasq.nix
   ];
 
   networking.hostName = "desktop-pc";
@@ -40,6 +41,7 @@
 #  boot.loader.efi.canTouchEfiVariables = true;
   
   lawford.system.core.enable = true;
+  lawford.system.dnsmasq.enable = true;
 
   lawford.desktop.hyprshot.enable = true;
   lawford.desktop.hyprland.enable = true;
@@ -51,6 +53,7 @@
   lawford.programs.neovim.enable = true;
   lawford.programs.librewolf.enable = true;
   lawford.programs.ssh.enable = true;
+  hardware.opentabletdriver.enable = true;
 
   lawford.services.netbird.enable = true;
   lawford.virtualisation.docker.enable = true;
@@ -58,7 +61,7 @@
   #lawford.games.hmcl.enable = true;
   lawford.games.legacylauncher.enable = true;
   lawford.programs.firefox.enable = true;
-  modules.flatpak.enable = true;
+  lawford.system.flatpak.enable = true;
 
   security.rtkit.enable = true;
   services.pipewire = {
