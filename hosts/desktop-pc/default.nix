@@ -80,6 +80,7 @@
   environment.systemPackages = with pkgs; [
     mumble
     pavucontrol
+    keepassxc
   ];
 
   networking.extraHosts =
