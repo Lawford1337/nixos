@@ -26,7 +26,7 @@ in
         ];
         
         cache-size = 1000;
-        min-cache-ttl = 3600;
+        min-cache-ttl = 500;
         max-cache-ttl = 86400;
         
         domain-needed = true;

@@ -31,6 +31,7 @@
   ];
 
   networking.hostName = "desktop-pc";
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
 #  boot.loader.grub = {
 #    enable = true;
@@ -52,7 +53,7 @@
   lawford.programs.terminal.enable = true;
   lawford.programs.neovim.enable = true;
   lawford.programs.librewolf.enable = true;
-  lawford.programs.ssh.enable = true;
+  lawford.programs.ssh.enable = false;
   hardware.opentabletdriver.enable = true;
 
   lawford.services.netbird.enable = true;
