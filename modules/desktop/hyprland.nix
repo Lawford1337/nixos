@@ -52,6 +52,11 @@ in
         pkgs.xdg-desktop-portal-gtk
       ];
       config.common.default = "*";
+      config.hyprland = {
+        default = [ "hyprland" "gtk" ];
+        "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
+      };
     };
 
     security.rtkit.enable = true;

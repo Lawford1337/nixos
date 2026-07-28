@@ -78,6 +78,14 @@
     shell = pkgs.zsh;
   };
 
+environment.sessionVariables = {
+  LIBVA_DRIVER_NAME = "nvidia";
+  NVD_BACKEND = "direct";
+  MOZ_DISABLE_RDD_SANDBOX = "1";
+  ELECTRON_OZONE_PLATFORM_HINT = "auto";
+  NIXOS_OZONE_WL = "1";
+};
+
   environment.systemPackages = with pkgs; [
     mumble
     pavucontrol
@@ -90,9 +98,17 @@
     127.0.0.1 garage
   '';
 
-  home-manager.users.lawford.home.packages = with pkgs; [
-    vesktop
-  ];
+home-manager.users.lawford.home.packages = with pkgs; [
+  (symlinkJoin {
+    name = "vesktop";
+    paths = [ vesktop ];
+    buildInputs = [ makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/vesktop \
+        --add-flags "--ozone-platform=wayland --enable-features=WaylandWindowDecorations,UseOzonePlatform"
+    '';
+  })
+];
 
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "23.11";
