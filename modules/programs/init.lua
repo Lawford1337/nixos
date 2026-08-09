@@ -3,7 +3,6 @@ vim.g.maplocalleader = " "
 
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.clipboard = "unnamedplus"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.splitright = true
@@ -23,7 +22,18 @@ vim.g.clipboard = {
   },
 }
 
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = vim.api.nvim_create_augroup("OSC52Yank", { clear = true }),
+  callback = function()
+    if vim.v.event.operator == "y" then
+      vim.fn.setreg("+", vim.fn.getreg('"'))
+    end
+  end,
+})
+
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+vim.keymap.set({"n", "v"}, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -47,17 +57,6 @@ require("lazy").setup({
       vim.cmd("colorscheme gruvbox")
     end,
   },
-
-  -- {
-  --   "echasnovski/mini.base16",
-  --   priority = 1000,
-  --   config = function()
-  --     -- Здесь указывается палитра. Для примера - default-dark.
-  --     require("mini.base16").setup({
-  --       palette = require('mini.base16').mini_palette('#112641', '#e2e98f', 75)
-  --     })
-  --   end,
-  -- },
 
   {
     "nvim-lualine/lualine.nvim",
@@ -107,16 +106,6 @@ require("lazy").setup({
   },
   { "ThePrimeagen/vim-be-good" },
   {
-    "amitds1997/remote-nvim.nvim",
-    version = "*",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-    config = true,
-  },
-  {
     "lewis6991/gitsigns.nvim",
     config = function()
       require("gitsigns").setup({ current_line_blame = true })
@@ -135,7 +124,7 @@ require("lazy").setup({
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
-      require("nvim-treesitter.configs").setup({
+      require("nvim-treesitter").setup({
         ensure_installed = { "c", "lua", "vim", "vimdoc", "javascript", "typescript", "tsx", "html", "css" },
         highlight = { enable = true },
       })
@@ -167,6 +156,10 @@ require("lazy").setup({
         typescriptreact = { "biome" },
         json = { "biome" },
       },
+      format_on_save = {
+        timeout_ms = 500,
+        lsp_fallback = true,
+      },
     },
   },
   {
@@ -192,10 +185,11 @@ require("lazy").setup({
         default = { "lsp", "path", "snippets", "buffer" },
         providers = {
           path = {
-            enabled = function()
-              local line = vim.api.nvim_get_current_line()
-              return not string.match(line, "@/")
-            end,
+            opts = {
+              get_cwd = function(_)
+                return vim.fn.expand("%:p:h")
+              end,
+            },
           },
         },
       },
@@ -219,10 +213,23 @@ require("lazy").setup({
           typescript = {
             suggest = { autoImports = true },
             updateImportsOnFileMove = { enabled = "always" },
+            preferences = {
+              importModuleSpecifier = "non-relative",
+              importModuleSpecifierPreference = "non-relative",
+              includePackageJsonAutoImports = "on",            
+            },
+            tsserver = {
+              watchOptions = { watchFile = "PriorityPollingInterval" }
+            }
           },
           javascript = {
             suggest = { autoImports = true },
             updateImportsOnFileMove = { enabled = "always" },
+            preferences = {
+              importModuleSpecifier = "non-relative",
+              importModuleSpecifierPreference = "non-relative",
+              includePackageJsonAutoImports = "on",
+            },
           },
         },
       })
@@ -231,8 +238,64 @@ require("lazy").setup({
       vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open Diagnostics" })
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
       
-      vim.keymap.set("n", "<leader>co", "<cmd>VtslsOrganizeImports<CR>", { desc = "Organize Imports" })
-      vim.keymap.set("n", "<leader>ci", "<cmd>VtslsAddMissingImports<CR>", { desc = "Add Missing Imports" })
+      local function apply_action(client, action, bufnr)
+        if not action.edit and not action.command then
+          local ok, resolved = pcall(function()
+            return client:request_sync("codeAction/resolve", action, 1000, bufnr)
+          end)
+          if ok and resolved and resolved.result then
+            action = resolved.result
+          end
+        end
+
+        if action.edit then
+          vim.lsp.util.apply_workspace_edit(action.edit, client.offset_encoding)
+        end
+        if action.command then
+          local command = type(action.command) == "table" and action.command or action
+          client:request_sync("workspace/executeCommand", command, 1000, bufnr)
+        end
+      end
+
+      local function make_full_range_params(bufnr)
+        local last_line = vim.api.nvim_buf_line_count(bufnr) - 1
+        return {
+          textDocument = vim.lsp.util.make_text_document_params(bufnr),
+          range = {
+            start = { line = 0, character = 0 },
+            ["end"] = { line = last_line, character = 2147483647 },
+          },
+        }
+      end
+
+      local function run_code_action(bufnr, client_name, kind)
+        bufnr = bufnr or vim.api.nvim_get_current_buf()
+        local client = vim.lsp.get_clients({ bufnr = bufnr, name = client_name })[1]
+        if not client then return end
+
+        local params = make_full_range_params(bufnr)
+        params.context = { only = { kind }, diagnostics = {} }
+
+        local resp = client:request_sync("textDocument/codeAction", params, 1000, bufnr)
+        if not resp or not resp.result then return end
+
+        for _, action in ipairs(resp.result) do
+          apply_action(client, action, bufnr)
+        end
+      end
+
+      _G.organize_imports = function(bufnr) run_code_action(bufnr, "biome", "source.organizeImports.biome") end
+      _G.add_missing_imports = function(bufnr) run_code_action(bufnr, "vtsls", "source.addMissingImports.ts") end
+
+      vim.keymap.set("n", "<leader>co", function() organize_imports() end, { desc = "Organize Imports" })
+      vim.keymap.set("n", "<leader>ci", function() add_missing_imports() end, { desc = "Add Missing Imports" })
+
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
+        callback = function(args)
+          organize_imports(args.buf)
+        end,
+      })
     end,
   },
   {
@@ -245,3 +308,4 @@ require("lazy").setup({
     },
   },
 })
+
