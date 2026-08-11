@@ -66,7 +66,7 @@
 
   programs.gamescope = {
     enable = true;
-    capSysNice = true;
+    capSysNice = false;
   };
 
   lawford.programs.firefox.enable = true;
