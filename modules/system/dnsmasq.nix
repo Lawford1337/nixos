@@ -25,9 +25,9 @@ in
           "1.0.0.1"
         ];
         
-        cache-size = 1000;
-        min-cache-ttl = 500;
-        max-cache-ttl = 86400;
+        #cache-size = 1000;
+        #min-cache-ttl = 500;
+        #max-cache-ttl = 86400;
         
         domain-needed = true;
         bogus-priv = true;
@@ -37,6 +37,6 @@ in
 
     networking.nameservers = [ "127.0.0.1" ];
     
-    networking.networkmanager.dns = "none";
+    networking.networkmanager.dns = "dnsmasq";
   };
 }

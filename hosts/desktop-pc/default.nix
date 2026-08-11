@@ -1,21 +1,19 @@
 { config, pkgs, ... }:
-
 {
   imports = [
     ./hardware-configuration.nix
-    
+
     ../../modules/hardware/desktop-nvidia.nix
-    
+
     ../../modules/system/core.nix
     ../../modules/system/netbird.nix
-    
+
     ../../modules/desktop/hyprland.nix
-    #../../modules/desktop/mangowm.nix 
+    #../../modules/desktop/mangowm.nix
     ../../modules/desktop/hyprshot.nix
     ../../modules/desktop/waybar.nix
     ../../modules/desktop/theme.nix
     ../../modules/desktop/launcher.nix
-
     ../../modules/programs/nvim.nix
     ../../modules/programs/terminal.nix
     ../../modules/programs/librewolf.nix
@@ -29,10 +27,8 @@
     ../../modules/programs/flatpak.nix
     ../../modules/system/dnsmasq.nix
   ];
-
   networking.hostName = "desktop-pc";
   boot.kernelPackages = pkgs.linuxPackages_zen;
-
 #  boot.loader.grub = {
 #    enable = true;
 #    efiSupport = true;
@@ -40,30 +36,41 @@
 #    useOSProber = true;
 #  };
 #  boot.loader.efi.canTouchEfiVariables = true;
-  
+
   lawford.system.core.enable = true;
   lawford.system.dnsmasq.enable = true;
-
   lawford.desktop.hyprshot.enable = true;
   lawford.desktop.hyprland.enable = true;
   lawford.desktop.waybar.enable = true;
   lawford.desktop.theme.enable = true;
   lawford.desktop.launcher.enable = true;
-  
+
   lawford.programs.terminal.enable = true;
   lawford.programs.neovim.enable = true;
   lawford.programs.librewolf.enable = true;
   lawford.programs.ssh.enable = false;
   hardware.opentabletdriver.enable = true;
-
   lawford.services.netbird.enable = true;
   lawford.virtualisation.docker.enable = true;
   #lawford.games.prismlauncher.enable = true;
   #lawford.games.hmcl.enable = true;
   lawford.games.legacylauncher.enable = true;
+
+  programs.steam.gamescopeSession.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
+
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true;
+  };
+
   lawford.programs.firefox.enable = true;
   lawford.system.flatpak.enable = true;
-
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -71,13 +78,11 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-
   users.users.lawford = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" "audio" "docker" ];
     shell = pkgs.zsh;
   };
-
 environment.sessionVariables = {
   LIBVA_DRIVER_NAME = "nvidia";
   NVD_BACKEND = "direct";
@@ -92,13 +97,11 @@ hardware.keyboard.qmk.enable = true;
     keepassxc
     vial
   ];
-
   networking.extraHosts =
   ''
     127.0.0.1 kochevnik.localhost
     127.0.0.1 garage
   '';
-
 home-manager.users.lawford.home.packages = with pkgs; [
   (symlinkJoin {
     name = "vesktop";
@@ -110,7 +113,6 @@ home-manager.users.lawford.home.packages = with pkgs; [
     '';
   })
 ];
-
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "23.11";
   home-manager.users.lawford.home.stateVersion = "23.11";
