@@ -80,7 +80,7 @@
   };
   users.users.lawford = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" "audio" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" "video" "audio" "docker" "input" ];
     shell = pkgs.zsh;
   };
 environment.sessionVariables = {
