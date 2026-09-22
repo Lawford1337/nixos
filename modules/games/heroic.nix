@@ -9,7 +9,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home-manager.user.lawford = {
+    home-manager.users.lawford = {
       home.packages = [ pkgs.heroic ];
     };
   };
