@@ -10,6 +10,11 @@ vim.opt.splitbelow = true
 vim.opt.cursorline = true
 vim.opt.termguicolors = true
 
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.expandtab = true
+
 vim.g.clipboard = {
   name = 'OSC 52',
   copy = {
@@ -125,7 +130,7 @@ require("lazy").setup({
     build = ":TSUpdate",
     config = function()
       require("nvim-treesitter").setup({
-        ensure_installed = { "c", "lua", "vim", "vimdoc", "javascript", "typescript", "tsx", "html", "css", "markdown", "markdown_inline" },
+        ensure_installed = { "c", "lua", "vim", "vimdoc", "javascript", "typescript", "tsx", "html", "css" },
         highlight = { enable = true },
       })
     end,
@@ -148,6 +153,19 @@ require("lazy").setup({
         desc = "Format file",
       },
     },
+    init = function()
+      vim.api.nvim_create_user_command("Format", function(args)
+        local range = nil
+        if args.count ~= -1 then
+          local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+          range = {
+            start = { args.line1, 0 },
+            ["end"] = { args.line2, end_line:len() },
+          }
+        end
+        require("conform").format({ async = true, lsp_fallback = true, range = range })
+      end, { range = true, desc = "Format buffer or range" })
+    end,
     opts = {
       formatters_by_ft = {
         javascript = { "biome" },
@@ -156,9 +174,13 @@ require("lazy").setup({
         typescriptreact = { "biome" },
         json = { "biome" },
       },
-      format_on_save = {
-        timeout_ms = 500,
-        lsp_fallback = true,
+      formatters = {
+        biome = {
+          prepend_args = {
+            "--indent-style=space",
+            "--indent-width=2",
+          },
+        },
       },
     },
   },
@@ -305,21 +327,6 @@ require("lazy").setup({
     keys = {
       { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
       { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
-    },
-  },
-  {
-    "MeanderingProgrammer/render-markdown.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
-    ft = { "markdown" },
-    opts = {},
-  },
-  {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = "cd app && npm install",
-    keys = {
-      { "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown Preview" },
     },
   },
 })

@@ -20,12 +20,14 @@
     ../../modules/programs/ssh.nix
     ../../modules/virtualisation/docker.nix
     ../../modules/virtualisation/qemu.nix
-    #../../modules/games/prismlauncher.nix
-    #../../modules/games/hmcl.nix
+    ../../modules/games/prismlauncher.nix
+    ../../modules/games/hmcl.nix
     ../../modules/games/legacylauncher.nix
     ../../modules/programs/firefox.nix
     ../../modules/programs/flatpak.nix
     ../../modules/system/dnsmasq.nix
+    ../../modules/games/lunarclient.nix
+    ../../modules/games/heroic.nix
   ];
   networking.hostName = "desktop-pc";
   boot.kernelPackages = pkgs.linuxPackages_zen;
@@ -52,9 +54,11 @@
   hardware.opentabletdriver.enable = true;
   lawford.services.netbird.enable = true;
   lawford.virtualisation.docker.enable = true;
-  #lawford.games.prismlauncher.enable = true;
-  #lawford.games.hmcl.enable = true;
+  lawford.games.prismlauncher.enable = true;
+  lawford.games.hmcl.enable = true;
   lawford.games.legacylauncher.enable = true;
+  lawford.games.lunarclient.enable = true;
+  lawford.games.heroic.enable = true;
 
   programs.steam.gamescopeSession.enable = true;
   programs.steam = {
